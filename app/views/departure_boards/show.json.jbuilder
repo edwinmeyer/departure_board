@@ -1,0 +1,1 @@
+json.partial! "departure_boards/departure_board", departure_board: @departure_board

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Carrier:</strong>
+  <%= @departure_board.carrier %>
+</p>
+
+<p>
+  <strong>Departure time:</strong>
+  <%= @departure_board.departure_time %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @departure_board.destination %>
+</p>
+
+<p>
+  <strong>Train:</strong>
+  <%= @departure_board.train %>
+</p>
+
+<p>
+  <strong>Track:</strong>
+  <%= @departure_board.track %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @departure_board.status %>
+</p>
+
+<%= link_to 'Edit', edit_departure_board_path(@departure_board) %> |
+<%= link_to 'Back', departure_boards_path %>
