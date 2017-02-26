@@ -209,7 +209,7 @@ $ bundle install # and install
 #### Commit into Git Repo
 ```bash
 $ git add . 
-$ git commit -m "update Gemfile for heroku"
+$ git commit -m "update Gemfile for Heroku"
 $ git push origin master
 ```
 
@@ -222,11 +222,11 @@ $ heroku login # provide email & password used by Heroku account
 - Note: The Heroku Toolbelt is installed upon first login
 
 ```bash
-$ heroku create # returns 'Creating radiant-castle-5978... done, stack is cedar-14'
+$ heroku create # Creates empty Heroku app & returns app name 'secure-castle-96417'
 ```
-- Note: The Heroku application id 'radiant-castle-5978' is that created by myself. Yours will be different.
-- Following deployment, the app will be accessible using the url https://radiant-castle-5978.herokuapp.com
-- Additionally, the 'heroku' remote https://git.heroku.com/radiant-castle-5978.git has been added to git. (Use 'heroku' rather than 'origin' to interact with the app's repository on Heroku.)
+- Note: The Heroku application id 'secure-castle-96417' is that created by myself. Yours will be different.
+- Following deployment, the app will be accessible using the url https://secure-castle-96417.herokuapp.com/
+- Additionally, the 'heroku' remote https://git.heroku.com/secure-castle-96417.git has been added to git. (Use 'heroku' rather than 'origin' to interact with the app's repository on Heroku.)
 
 ```bash
 $ git config --list | grep heroku # list the just-created remotes for heroku 
@@ -235,7 +235,8 @@ $ git config --list | grep heroku # list the just-created remotes for heroku
 
 ```bash
 $ git push heroku master # Now deploy the app to Heroku
-$ heroku run rake db:migrate # Performs the DB migrations on radiant-castle-5978
+# probably not needed for no-DB app & causes error
+$ heroku run rake db:migrate # Performs the DB migrations on secure-castle-96417
 ```
 
 ### Run the App on Heroku
@@ -247,17 +248,18 @@ $ heroku ps # check the state of the app’s dynos. Returns:
 
 ```bash
 === web (Free): `bin/rails server -p $PORT -e $RAILS_ENV`
-web.1: up 2015/11/01 10:55:30 (~ 10m ago)
+web.1: up 2017/02/25 20:55:25 -0700 (~ 2m ago)
 ```
 
 ### View application in web browser
 ```bash
-$ heroku open # Performs any necessary updates and opens the 'radiant-castle-5978' app in the default web browser
+$ heroku open # Performs any necessary updates and opens the 'secure-castle-96417' app in the default web browser
 ```
 or
 
-`https://radiant-castle-5978.herokuapp.com` # directly access the app in a browser
+`https://secure-castle-96417.herokuapp.com` # directly access the app in a browser
 
+# START duplication of above
 ### Push the Git repository to Github
 - log into your Github account from a browser (e.g. https://github.com/edwinmeyer)
 
@@ -277,8 +279,8 @@ $ git remote -v # returns, e.g.:
 ```bash
 github	git@github.com:edwinmeyer/departure_board.git (fetch)
 github	git@github.com:edwinmeyer/departure_board.git (push)
-heroku	https://git.heroku.com/radiant-castle-5978.git (fetch)
-heroku	https://git.heroku.com/radiant-castle-5978.git (push)
+heroku	https://git.heroku.com/secure-castle-96417.git (fetch)
+heroku	https://git.heroku.com/secure-castle-96417.git (push)
 ```
 Now there are two separate remotes: 'heroku' & 'github' which are used instead of 'origin' in git commands. To better distinguish between the Github and Heroku remotes, the name 'origin' is not used.
 
@@ -287,6 +289,7 @@ Now there are two separate remotes: 'heroku' & 'github' which are used instead o
 $ git push -u github master # same code as pushed to Heroku now also on Github
 ```
 - Note: the "-u" option links the local tracking branch to the same-named remote branch
+# END duplication of above
 
 ### Setup Application for RSpec Tests
 In test-driven development, the tests would come first, but this would confuse the workflow and is an uncessessary complication for such a simple app. 
@@ -307,11 +310,15 @@ end
 ```
 ```bash
 $ bundle install # and install
+- NOT NEEDED:
 $ rake db:test:clone # Recreate the test database from the current environment’s (_development_) database schema.
 $ rails generate rspec:install
 ```
 - Add to spec/rails_helper.rb:
 `require 'capybara/rails'`
+
+####  Commit & Push the repository with RSpec environment to Github and Heroku.
+
 
 ### Setup Java for RubyMine
 RubyMine is a popular commercial Ruby IDE sold by jetbrains.com. It is a Java app, and a Java Development Kit must be installed.
