@@ -199,7 +199,7 @@ Note: This does not install git, contrary to some indications in web search resu
 
 #### Add to Gemfile: 
 ```ruby
-  ruby "2.3.0" # Add following the 'source' line to give Heroku the exact Ruby version
+  ruby "2.4.0" # Add following the 'source' line to give Heroku the exact Ruby version
   gem 'rails_12factor', group: :production 
 ```
 ```bash
@@ -209,7 +209,8 @@ $ bundle install # and install
 #### Commit into Git Repo
 ```bash
 $ git add . 
-$ git commit -m "update gemfile for heroku"
+$ git commit -m "update Gemfile for heroku"
+$ git push origin master
 ```
 
 ### Create Heroku Account & Deploy Application
