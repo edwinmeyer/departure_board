@@ -175,6 +175,17 @@ $ git add .
 $ git commit -m "initial commit of app with basic features"
 ```
 
+### Create new Github Repository & Push local Repo
+- Create a new 'departure_board' repo on Github per https://help.github.com/articles/creating-a-new-repository/
+> https://<your github account>/departure_board # open repo dashboard
+- Click 'Clone or download' button
+- Click the clipboard with arrow icon to copy the project url to clipboard
+- per https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line :
+- in local departure_board project root:
+$ git remote add origin git@github.com:<your github account>/departure_board.git # sets remote url in local repo
+$ git remote -v # verify new remote URL added properly
+$ git push -f origin master # push repo to Github account. (have been developing in 'master' branch) -- '-f' overwrites irrelevant existing content
+
 ### Develop the Application
 _So that you have something to deploy_
 
