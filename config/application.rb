@@ -25,8 +25,5 @@ module DepartureBoardClient
     puts "application.rb -- before add to config.autoload_paths"
     config.autoload_paths << "#{Rails.root}/lib"
     config.autoload_paths << "#{Rails.root}/lib/sim_departure_feed"
-
-    # config.time_zone = "Eastern Time (US & Canada)"
-
   end
 end

@@ -1,5 +1,7 @@
 class DepartureBoard
 
+  ::Departure # This kludge is required in Heroku (but not localhost) for some reason
+
   def self.origins()
     DepartureFeed.get_origins
   end
