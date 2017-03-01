@@ -1,10 +1,10 @@
-# DepartureBoard -- A Ruby and Rails 5 Sample App 
+# DepartureBoardClient -- A Ruby and Rails 5 Sample App 
 ## with RVM, Git, Github, Heroku, Twitter Bootstrap, RSpec, NO database, and RubyMine
 ## Setup Notes
 #### *Edwin W. Meyer*
 
 ## Introduction
-*DepartureBoard* is a Ruby on Rails sample application that presents a train departure board for a station with destination, train & track numbers, expected departure times, and status.
+*DepartureBoardClient* is a Ruby on Rails sample application that presents a trip departure board for a station with destination, trip & track numbers, expected departure times, and status.
 
 These notes cover environment setup for this Ruby on Rails 5 app on Ubuntu 16.04 using RVM, Git, Github, and RSpec, with deployment to Heroku. Installation of the RubyMine IDE is also covered. No database is involved, since this demo app obtains its data from a static file.
 
@@ -129,7 +129,7 @@ The native extensions for json gem versions < 1.8.5 will not compile when Ruby 2
 ### Create Application Elements Using Rails Generate Commands
 This is a simple way of creating basic functional app with controllers, models & views from the command line.
 ```bash
-$ rails generate scaffold DepartureBoard carrier:string departure_time:string destination:string train:string track:string status:string
+$ rails generate scaffold DepartureBoard carrier:string scheduledtime:string destination:string trip:string track:string status:string
 $ rake -T # list rake tasks as a smoke test
 ```
 - Add to routes.rb : 
@@ -271,18 +271,16 @@ or
 
 - Warning:  Do _not_ add a license or any other files. That would create an initial commit on Github conflicting with that in the local and Heroku repos.
 
-#### Add the 'github' remote for Github
-```bash
-$ git remote add github git@github.com:edwinmeyer/departure_board.git 
 $ git remote -v # returns, e.g.:
 ```
+
 ```bash
-github	git@github.com:edwinmeyer/departure_board.git (fetch)
-github	git@github.com:edwinmeyer/departure_board.git (push)
 heroku	https://git.heroku.com/secure-castle-96417.git (fetch)
 heroku	https://git.heroku.com/secure-castle-96417.git (push)
+origin	git@github.com:edwinmeyer/departure_board.git (fetch)
+origin	git@origin.com:edwinmeyer/departure_board.git (push)
 ```
-Now there are two separate remotes: 'heroku' & 'github' which are used instead of 'origin' in git commands. To better distinguish between the Github and Heroku remotes, the name 'origin' is not used.
+Now there are two separate remotes: 'origin' & 'heroku'. These are independent of each other. Pushing to orign updates the Github repo; pushing to heroku installs the changes on Heroku
 
 ####  Push the repository to Github.
 ```bash
@@ -318,7 +316,11 @@ $ rails generate rspec:install
 `require 'capybara/rails'`
 
 ####  Commit & Push the repository with RSpec environment to Github and Heroku.
-
+$ git add . # Add all new/changed code
+$ git commit -m 'Add RSpec code'
+- The following commands look similar, but they do quite different things:
+$ git push origin master # push changes to Github repp
+$ git push heroku master # intall changes into Heroku app
 
 ### Setup Java for RubyMine
 RubyMine is a popular commercial Ruby IDE sold by jetbrains.com. It is a Java app, and a Java Development Kit must be installed.

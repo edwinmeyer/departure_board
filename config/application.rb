@@ -16,10 +16,17 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module DepartureBoard
+module DepartureBoardClient
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    puts "application.rb -- before add to config.autoload_paths"
+    config.autoload_paths << "#{Rails.root}/lib"
+    config.autoload_paths << "#{Rails.root}/lib/sim_departure_feed"
+
+    # config.time_zone = "Eastern Time (US & Canada)"
+
   end
 end

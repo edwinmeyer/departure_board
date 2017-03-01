@@ -1,34 +1,15 @@
-<p id="notice"><%= notice %></p>
+<p style="text-align: center;"><%= params[:id].upcase %> TRAIN INFORMATION</p>
 
-<p>
-  <strong>Carrier:</strong>
-  <%= @departure_board.carrier %>
-</p>
-
-<p>
-  <strong>Departure time:</strong>
-  <%= @departure_board.departure_time %>
-</p>
-
-<p>
-  <strong>Destination:</strong>
-  <%= @departure_board.destination %>
-</p>
-
-<p>
-  <strong>Train:</strong>
-  <%= @departure_board.train %>
-</p>
-
-<p>
-  <strong>Track:</strong>
-  <%= @departure_board.track %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @departure_board.status %>
-</p>
-
-<%= link_to 'Edit', edit_departure_board_path(@departure_board) %> |
-<%= link_to 'Back', departure_boards_path %>
+<table style="width:95%">
+  <tr>
+    <th>CARRIER</th>
+    <th>TIME</th>
+    <th>DESTINATION</th>
+    <th>TRAIN#</th>
+    <th>TRACK#</th>
+    <th>STATUS</th>
+  </tr>
+  <%= render partial: "departure", collection: @departure_board, as: :departure %>
+</table>
+<br/>
+<%= link_to 'Back to Departure Boards List', departure_boards_path %>
