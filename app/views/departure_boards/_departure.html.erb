@@ -1,8 +1,8 @@
-<tr>
-  <td><%= departure.carrier %></td>
-  <td><%= epoch_to_eastern_time(departure.scheduledtime) %></td>
-  <td><%= departure.destination %></td>
+<tr class="text">
+  <td><%= departure.carrier.upcase %></td>
+  <td class="rightalign scheduled_time"><%= epoch_to_eastern_time(departure.scheduledtime) %></td>
+  <td><%= departure.destination.upcase %></td>
   <td><%= departure.trip %></td>
-  <td><%= track_num(departure.track) %></td>
-  <td><%= departure.status %></td>
+  <td class="leftalign"><%= track_num(departure.track) %></td>
+  <td class="statustext"><%= departure.status.upcase %></td>
 </tr>

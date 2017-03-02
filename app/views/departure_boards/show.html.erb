@@ -1,15 +1,22 @@
-<p style="text-align: center;"><%= params[:id].upcase %> TRAIN INFORMATION</p>
 
-<table style="width:95%">
-  <tr>
-    <th>CARRIER</th>
-    <th>TIME</th>
-    <th>DESTINATION</th>
-    <th>TRAIN#</th>
-    <th>TRACK#</th>
-    <th>STATUS</th>
-  </tr>
-  <%= render partial: "departure", collection: @departure_board, as: :departure %>
-</table>
-<br/>
-<%= link_to 'Back to Departure Boards List', departure_boards_path %>
+<div class="content_wrapper">
+  <div class="departure_board">
+    <h1 class="heading"><%= params[:id].upcase %> TRAIN INFORMATION</h1>
+
+    <table>
+      <tr class="subheading">
+        <th>CARRIER</th>
+        <th>TIME</th>
+        <th class="destination">DESTINATION</th>
+        <th>TRAIN#</th>
+        <th>TRACK#</th>
+        <th>STATUS</th>
+      </tr>
+      <%= render partial: "departure", collection: @departure_board, as: :departure %>
+    </table>
+  </div>
+
+  <div class="backlink">
+    <%= link_to 'Back to Departure Boards List', departure_boards_path %>
+  </div>
+</div>

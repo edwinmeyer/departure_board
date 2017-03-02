@@ -32,7 +32,6 @@ module SimDepartureFeed
 
     # Modified from https://gist.github.com/enriclluelles/1423950
     def self.csv_to_json(csv_text)
-      puts "csv_to_json called"
       lines = CSV.parse(csv_text)
       keys = lines.delete lines.first
       keys.map! {|k| k.downcase}
