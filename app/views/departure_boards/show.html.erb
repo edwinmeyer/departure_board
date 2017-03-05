@@ -4,15 +4,25 @@
     <h1 class="heading"><%= params[:id].upcase %> TRAIN INFORMATION</h1>
 
     <table>
+      <thead>
+        <col class="tbl-col">
+        <col class="tbl-col">
+        <col class="tbl-col-dest">
+        <col class="tbl-col">
+        <col class="tbl-col">
+        <col class="tbl-col">
+        <col class="tbl-col">
+
+      </thead>
       <tr class="subheading">
-        <th class="carrier">CARRIER</th>
+        <th>CARRIER</th>
         <th>TIME</th>
-        <th class="destination">DESTINATION</th>
+        <th>DESTINATION</th>
         <th>TRAIN#</th>
         <th>TRACK#</th>
         <th>STATUS</th>
       </tr>
-      <%= render partial: "departure", collection: @departure_board, as: :departure %>
+      <%= render partial: "departure", collection: sort_limit(@departure_board), as: :departure %>
     </table>
   </div>
 
