@@ -78,23 +78,6 @@ $ sudo apt-get install git # version 2.7.4 is installed
 ```
 - Note: The latest version can be installed from https://git-scm.com/downloads, but this is not usually necessary.
 
-
-## DELETE -- NO DATABASE
-### Instal Postgres
-Per https://gorails.com/setup/ubuntu/14.04 & https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04
-```bash
-$ sudo apt-get install postgresql postgresql-contrib # version 9.5
-```
-- Note 1: postgres now runs as a service started upon boot. 
-- Note 2: A 'postgres' role (user) has been created. 
-# To test installation, run client as postgres user: 
-```bash
-$ sudo -i -u postgres # start new shell as postgres user
-$ psql # start client as postgres user
-# \q # exit psql
-$ exit # exit postgres user shell
-```
-
 ### Create Project Directory 
 This is often prescribed as to be done during Rails app creation. However, doing this initially allows more flexibility, particularly for RVM setup.
 ```bash
@@ -137,28 +120,6 @@ $ rake -T # list rake tasks as a smoke test
 root 'departure_board#index'
 ```
 
-## DELETE -- NO DATABASE
-- Add to database.yml under both development & test environments: 
-```bash
-username: rails_user # otherwise rails looks for the user name of the currently logged in user
-password: rails_user_pwd # see https://gist.github.com/p1nox/4953113 for how to omit password
-host: localhost # Otherwise get : FATAL: Peer authentication failed for user "rails_user"
-```
-
-```bash
-$ sudo -u postgres createuser -s rails_user 
-$ sudo -i -u postgres psql # Enter Postgres client
-```
-
-- Note: '#' represents the psql prompt below
-```bash
-# \password rails_user # Set password & confirmation at prompt as 'rails_user_pwd'
-# \q
-$ rake db:create
-$ rake db:migrate 
-```
-- Note: More at https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-ubuntu-14-04
-
 ### Smoke Test Skeletal Rails App
 ```bash
 $ rails server -e development -p 3000 # run from a separate console -- default environment & port explicitly provided
@@ -175,7 +136,7 @@ $ git add .
 $ git commit -m "initial commit of app with basic features"
 ```
 
-### Create new Github Repository & Push local Repo
+### Create new Github Repository and Push local Repo
 - Create a new 'departure_board' repo on Github per https://help.github.com/articles/creating-a-new-repository/
 > https://<your github account>/departure_board # open repo dashboard
 - Click 'Clone or download' button
@@ -183,14 +144,22 @@ $ git commit -m "initial commit of app with basic features"
 - per https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line :
 - in local departure_board project root:
 $ git remote add origin git@github.com:<your github account>/departure_board.git # sets remote url in local repo
-$ git remote -v # verify new remote URL added properly
+$ git remote -v # verify new remote URL added properly. Returns, e.g.:
+```bash
+heroku	https://git.heroku.com/secure-castle-96417.git (fetch)
+heroku	https://git.heroku.com/secure-castle-96417.git (push)
+origin	git@github.com:edwinmeyer/departure_board.git (fetch)
+origin	git@origin.com:edwinmeyer/departure_board.git (push)
+```
+Now there are two separate remotes: 'origin' & 'heroku'. These are independent of each other. Pushing to origin updates the Github repo; pushing to heroku installs the changes on Heroku.  
+
 $ git push -f origin master # push repo to Github account. (have been developing in 'master' branch) -- '-f' overwrites irrelevant existing content
 
 ### Develop the Application
 _So that you have something to deploy_
 
 ### Heroku Setup Prior to App Deployment
-#### Download & Install Heroku Toolbelt CLI
+#### Download and Install Heroku Toolbelt CLI
 Per https://toolbelt.heroku.com/debian :
 ```bash
 $ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
@@ -213,11 +182,11 @@ $ git commit -m "update Gemfile for Heroku"
 $ git push origin master
 ```
 
-### Create Heroku Account & Deploy Application
-Create a free account at https://signup.heroku.com/. Enter first & last name, email, and company name. Select Ruby as primary development language. Also create a password.
+### Create Heroku Account and Deploy Application
+Create a free account at https://signup.heroku.com/. Enter first name, last name, email, and company name. Select Ruby as primary development language. Also create a password.
 
 ```bash
-$ heroku login # provide email & password used by Heroku account
+$ heroku login # provide email and password used by Heroku account
 ```
 - Note: The Heroku Toolbelt is installed upon first login
 
@@ -235,10 +204,11 @@ $ git config --list | grep heroku # list the just-created remotes for heroku
 
 ```bash
 $ git push heroku master # Now deploy the app to Heroku
-# probably not needed for no-DB app & causes error
-$ heroku run rake db:migrate # Performs the DB migrations on secure-castle-96417
 ```
 
+Note: Execute `$ heroku run rake db:migrate` for an application that uses a database (Postgres for Heroku) to perform the DB migrations.  
+This app has no database, so this step is omitted.
+` 
 ### Run the App on Heroku
 ```bash
 $ heroku ps:scale web=1 # Ensure one dyno is running the web process type
@@ -259,35 +229,6 @@ or
 
 `https://secure-castle-96417.herokuapp.com` # directly access the app in a browser
 
-# START duplication of above
-### Push the Git repository to Github
-- log into your Github account from a browser (e.g. https://github.com/edwinmeyer)
-
-##### Create empty 'departure_board' repository
-
-- click "+^" next to thumbnail in upper right corner
-- click "New repository"
-- set names as "departure_board" & add a short description.
-
-- Warning:  Do _not_ add a license or any other files. That would create an initial commit on Github conflicting with that in the local and Heroku repos.
-
-$ git remote -v # returns, e.g.:
-```
-
-```bash
-heroku	https://git.heroku.com/secure-castle-96417.git (fetch)
-heroku	https://git.heroku.com/secure-castle-96417.git (push)
-origin	git@github.com:edwinmeyer/departure_board.git (fetch)
-origin	git@origin.com:edwinmeyer/departure_board.git (push)
-```
-Now there are two separate remotes: 'origin' & 'heroku'. These are independent of each other. Pushing to orign updates the Github repo; pushing to heroku installs the changes on Heroku
-
-####  Push the repository to Github.
-```bash
-$ git push -u github master # same code as pushed to Heroku now also on Github
-```
-- Note: the "-u" option links the local tracking branch to the same-named remote branch
-# END duplication of above
 
 ### Setup Application for RSpec Tests
 In test-driven development, the tests would come first, but this would confuse the workflow and is an uncessessary complication for such a simple app. 
@@ -308,14 +249,12 @@ end
 ```
 ```bash
 $ bundle install # and install
-- NOT NEEDED:
-$ rake db:test:clone # Recreate the test database from the current environment’s (_development_) database schema.
 $ rails generate rspec:install
 ```
 - Add to spec/rails_helper.rb:
 `require 'capybara/rails'`
 
-####  Commit & Push the repository with RSpec environment to Github and Heroku.
+####  Commit and Push the repository with RSpec environment to Github and Heroku.
 $ git add . # Add all new/changed code
 $ git commit -m 'Add RSpec code'
 - The following commands look similar, but they do quite different things:
