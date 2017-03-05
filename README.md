@@ -1,5 +1,5 @@
 # DepartureBoardClient -- A Ruby and Rails 5 Sample App 
-## with RVM, Git, Github, Heroku, Twitter Bootstrap, RSpec, NO database, and RubyMine
+## with RVM, Git, Github, Heroku, RSpec, NO database, and RubyMine
 ## Setup Notes
 #### *Edwin W. Meyer*
 
